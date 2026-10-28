@@ -1,0 +1,10 @@
+# Per-user IntelliJ state - never commit these.
+/workspace.xml
+/usage.statistics.xml
+/shelf/
+/httpRequests/
+/tasks.xml
+/dictionaries/
+/libraries/
+/modules.xml
+/.name

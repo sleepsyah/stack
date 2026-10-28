@@ -1,0 +1,14 @@
+# Compiled output
+*.class
+bin/
+out/
+target/
+
+# IDE and OS noise
+.vscode/
+.DS_Store
+Thumbs.db
+
+# IntelliJ: .idea/ IS committed on purpose (JDK level and code style live there).
+# The per-user files inside it are excluded by .idea/.gitignore.
+*.iml
