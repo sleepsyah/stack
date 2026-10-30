@@ -23,7 +23,39 @@
 public class RPNCalculator {
 
     public static double evaluate(String expression) {
-        throw new UnsupportedOperationException("evaluate: not written yet");
+        if (expression == null || expression.trim().isEmpty()) {
+            throw new IllegalArgumentException("Expression must contain a value");
+        }
+
+        Stack<Double> values = new LinkedStack<Double>();
+        for (String token : expression.trim().split("\\s+")) {
+            if (token.equals("+") || token.equals("-")
+                    || token.equals("*") || token.equals("/")) {
+                if (values.size() < 2) {
+                    throw new IllegalArgumentException("Not enough operands for " + token);
+                }
+                // The most recently pushed value is the RIGHT operand.
+                double right = values.pop();
+                double left = values.pop();
+                switch (token) {
+                    case "+": values.push(left + right); break;
+                    case "-": values.push(left - right); break;
+                    case "*": values.push(left * right); break;
+                    case "/": values.push(left / right); break;
+                }
+            } else {
+                try {
+                    values.push(Double.parseDouble(token));
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("Invalid token: " + token, e);
+                }
+            }
+        }
+
+        if (values.size() != 1) {
+            throw new IllegalArgumentException("Expression must leave exactly one value");
+        }
+        return values.pop();
     }
 
     /** GIVEN -- try your own expressions:   java RPNCalculator "5 1 2 + 4 * + 3 -"  */
