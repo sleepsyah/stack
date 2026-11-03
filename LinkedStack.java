@@ -6,9 +6,7 @@
  *
  * The top is the HEAD of a singly linked list.  Why the head and not the tail?
  * At the head, push links a new node to the old top, and pop moves top to
- * the next node. Both take O(1), with no traversal. Removing the tail of a
- * singly linked list requires finding its predecessor, which takes O(n),
- * even if we keep a reference to the tail.
+ * the next node. Removing the tail of a singly linked list requires finding the previous element, which takes O(n)
  */
 import java.util.EmptyStackException;
 

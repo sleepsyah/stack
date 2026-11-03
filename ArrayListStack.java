@@ -7,10 +7,10 @@
  *   index size() - 1?   push = add(x)     and pop = remove(size() - 1)
  * One choice makes push and pop O(1); the other makes both O(n).
  *
- * The top is at index size() - 1, the end of the ArrayList.
- * Adding and removing there does not shift the other elements. Pop is O(1),
- * and push is amortized O(1): an occasional resize copies the backing array.
- * At index 0, both operations would shift elements and take O(n).
+ * The top is at index size() - 1 which is the end of the ArrayList
+ * Adding and removing the top element does not shift the other elements, so both push and pop are O(1),
+
+ * At index 0, both operations would shift elements and take O(n)
  */
 import java.util.ArrayList;
 import java.util.EmptyStackException;
