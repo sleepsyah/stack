@@ -23,32 +23,32 @@
 public class RPNCalculator {
 
     public static double evaluate(String expression) {
-        if (expression == null || expression.trim().isEmpty()) {
+        if (expression == null || expression.isEmpty()) {
             throw new IllegalArgumentException("Expression must contain a value");
         }
 
         Stack<Double> values = new LinkedStack<Double>();
-        for (String token : expression.trim().split("\\s+")) {
+        String[] tokens = expression.split("\\s+");
+        for (int index = 0; index < tokens.length; index++) {
+            String token = tokens[index];
             if (token.equals("+") || token.equals("-")
                     || token.equals("*") || token.equals("/")) {
                 if (values.size() < 2) {
                     throw new IllegalArgumentException("Not enough operands for " + token);
                 }
-                // The most recently pushed value is the RIGHT operand.
                 double right = values.pop();
                 double left = values.pop();
-                switch (token) {
-                    case "+": values.push(left + right); break;
-                    case "-": values.push(left - right); break;
-                    case "*": values.push(left * right); break;
-                    case "/": values.push(left / right); break;
+                if (token.equals("+")) {
+                    values.push(left + right);
+                } else if (token.equals("-")) {
+                    values.push(left - right);
+                } else if (token.equals("*")) {
+                    values.push(left * right);
+                } else if (token.equals("/")) {
+                    values.push(left / right);
                 }
             } else {
-                try {
-                    values.push(Double.parseDouble(token));
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("Invalid token: " + token, e);
-                }
+                values.push(Double.parseDouble(token));
             }
         }
 
@@ -57,6 +57,8 @@ public class RPNCalculator {
         }
         return values.pop();
     }
+
+
 
     /** GIVEN -- try your own expressions:   java RPNCalculator "5 1 2 + 4 * + 3 -"  */
     public static void main(String[] args) {
